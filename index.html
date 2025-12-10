@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Student Portal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="card" id="login-section">
+  <h2>Login</h2>
+  <input type="text" id="login-user" placeholder="Username">
+  <input type="password" id="login-pass" placeholder="Password">
+  <button onclick="login()">Login</button>
+  <p class="switch-text">Don't have an account? <span onclick="showRegister()">Register</span></p>
+  <p class="error" id="login-error"></p>
+</div>
+
+<!-- REGISTER -->
+<div class="card hidden" id="register-section">
+  <h2>Register</h2>
+  <input type="text" id="reg-user" placeholder="Username">
+  <input type="email" id="reg-email" placeholder="Email">
+  <input type="password" id="reg-pass" placeholder="Password">
+  <input type="password" id="reg-confirm" placeholder="Confirm Password">
+  <button onclick="registerUser()">Register</button>
+  <p class="switch-text">Already have an account? <span onclick="showLogin()">Login</span></p>
+  <p class="error" id="reg-error"></p>
+</div>
+
+<!-- DASHBOARD -->
+<div class="card hidden" id="dashboard">
+  <h2>Hello, <span id="student-name"></span></h2>
+  <div class="menu">
+    <button onclick="showSection('profile-section')">Profile</button>
+    <button onclick="showSection('courses-section')">Courses</button>
+    <button onclick="showSection('assignments-section')">Assignments</button>
+    <button onclick="showSection('grades-section')">Grades</button>
+    <button onclick="showSection('attendance-section')">Attendance</button>
+    <button onclick="showSection('report-section')">Report Card</button>
+  </div>
+  <button class="logout-btn" onclick="logout()">Logout</button>
+</div>
+
+<!-- PROFILE -->
+<div class="card hidden" id="profile-section">
+  <h2>Profile</h2>
+  <div class="profile-pic-area">
+    <img id="profile-pic" src="assets/default.png">
+    <input type="file" id="upload-pic">
+  </div>
+  <input type="text" id="profile-name" placeholder="Full Name">
+  <input type="email" id="profile-email" placeholder="Email">
+  <textarea id="profile-bio" placeholder="Your bio..."></textarea>
+  <button onclick="saveProfileData()">Save Profile</button>
+</div>
+
+<!-- COURSES -->
+<div class="card hidden" id="courses-section">
+  <h2>Courses</h2>
+  <input type="text" id="course-title" placeholder="Course Title">
+  <input type="text" id="course-instructor" placeholder="Instructor">
+  <input type="number" id="course-credits" placeholder="Credits">
+  <input type="text" id="course-semester" placeholder="Semester">
+  <button onclick="addCourse()">Add Course</button>
+  <table id="courses-table">
+    <thead>
+      <tr>
+        <th>Title</th><th>Instructor</th><th>Credits</th><th>Semester</th><th>Actions</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+
+<!-- ASSIGNMENTS -->
+<div class="card hidden" id="assignments-section">
+  <h2>Assignments</h2>
+  <input type="text" id="assignment-title" placeholder="Assignment Title">
+  <input type="text" id="assignment-course" placeholder="Course">
+  <input type="date" id="assignment-due">
+  <textarea id="assignment-desc" placeholder="Description"></textarea>
+  <input type="number" id="assignment-points" placeholder="Points">
+  <button onclick="addAssignment()">Add Assignment</button>
+  <table id="assignments-table">
+    <thead>
+      <tr>
+        <th>Title</th><th>Course</th><th>Due</th><th>Points</th><th>Status</th><th>Actions</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+
+<!-- GRADES -->
+<div class="card hidden" id="grades-section">
+  <h2>Grades & GPA</h2>
+  <table id="grades-table">
+    <thead>
+      <tr>
+        <th>Course</th><th>Assignment</th><th>Score</th><th>Actions</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <p>GPA: <span id="gpa">0.00</span></p>
+</div>
+
+<!-- ATTENDANCE -->
+<div class="card hidden" id="attendance-section">
+  <h2>Attendance</h2>
+  <input type="text" id="attendance-course" placeholder="Course">
+  <input type="date" id="attendance-date">
+  <select id="attendance-status">
+    <option value="present">Present</option>
+    <option value="absent">Absent</option>
+  </select>
+  <button onclick="markAttendance()">Mark Attendance</button>
+  <table id="attendance-table">
+    <thead>
+      <tr>
+        <th>Course</th><th>Date</th><th>Status</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+
+<!-- REPORT -->
+<div class="card hidden" id="report-section">
+  <h2>Report Card</h2>
+  <div id="report-content"></div>
+  <button onclick="printReport()">Print Report</button>
+</div>
+
+<script src="storage.js"></script>
+<script src="script.js"></script>
+<script src="profile.js"></script>
+<script src="courses.js"></script>
+<script src="assignments.js"></script>
+<script src="grades.js"></script>
+<script src="attendance.js"></script>
+<script src="report.js"></script>
+
+<script>
+  function showSection(sectionId) {
+    document.querySelectorAll('.card').forEach(c => c.classList.add('hidden'));
+    document.getElementById('dashboard').classList.remove('hidden');
+    document.getElementById(sectionId).classList.remove('hidden');
+  }
+</script>
+
+</body>
+</html>
